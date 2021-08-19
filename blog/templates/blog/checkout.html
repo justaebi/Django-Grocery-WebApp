@@ -1,0 +1,17 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{%load poll_extras%}
+{% block title %}
+Checkout
+{% endblock title %}
+{%block cart%}
+{{cart_no}}
+{%endblock%}
+{% block content %}
+    <h2><span class="glyphicon glyphicon-map-marker"></span>Delivery Address</h2>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <small>Delivery Option : Cash on Delivery</small>
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}

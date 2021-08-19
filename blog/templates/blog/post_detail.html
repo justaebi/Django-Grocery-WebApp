@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %}
+{%load poll_extras%}
+{%block cart%}
+{{cart_no}}
+{%endblock%}
+
+{% block content %}
+    <div class="post">
+        {% if post.published_date %}
+            <div class="publish">
+                {{ post.published_date }}
+            </div>
+        {% endif %}
+        <small>Posted by <small class="author">{{post.author}}</small></small>
+        {% if user.is_authenticated %}
+        {%if post.author.username == request.user.get_username%}
+        <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}" style="float: right;"><span class="glyphicon glyphicon-pencil"></span></a>
+        {% endif %}
+        {% endif %}
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+{% endblock %}

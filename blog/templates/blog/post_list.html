@@ -1,0 +1,48 @@
+{% extends 'blog/base.html' %}
+{%load poll_extras%}
+{%block cart%}
+{{cart_no}}
+{%endblock%}
+{% block title %}
+Posts
+{% endblock title %}
+{%block activity_posts%}
+class = 'active'
+{%endblock%}
+
+{%block stl%}
+<style type="text/css">
+.ln{
+    font-size : 30px;
+}
+.yp{
+    margin-top: 0px;
+}
+.in_post_list{
+    background-color: rgb(216, 253, 216);
+    margin-top: 0px;
+    padding-right: 0px;
+    margin-bottom: 25px;
+}
+</style>
+{%endblock%}
+
+{% block content %}
+    {%if request.user.is_authenticated %}
+    <div class="col-md-1 col-md-push-11">
+        <a href="{% url 'post_new' %}" class="yp"><span class="glyphicon glyphicon-plus-sign ln"></a>
+    </div>
+    {% endif %}
+    <div class="col-md-12 yp">
+    {% for post in posts %}
+        <div class="post">
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
+            <div class="date">
+                <small>Posted by <small class="author">{{post.author}} </small>on :</small><span class="publish"> {{post.published_date }}</span>
+            </div>
+            
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

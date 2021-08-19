@@ -1,0 +1,239 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{%load poll_extras%}
+{% block title %}
+Home    
+{% endblock title %}
+{%block cart%}
+{{cart_no}}
+{%endblock%}
+{%block stl%}
+<style type="text/css">
+    #myr{
+        margin-top:-20px;
+    }
+    .box1 {
+        background-color: gray;
+        height: 300px;
+        margin-bottom: 20px;
+    }
+
+    .boximg {
+        height: 300px;
+        margin-bottom: 20px;
+    }
+
+    .imag {
+        height: 100%;
+        width: 100%;
+    }
+
+    .inbox1 {
+        background-color: black;
+        height: 300px;
+    }
+
+    .product_box {
+        padding: 0px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .product {
+        height: 400px;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .innerproduct {
+        height: 100%;
+        background-color: white;
+        padding-top: 20px;
+        padding-right: 30px;
+        padding-left: 30px;
+        margin-bottom: 0px;
+    }
+
+    .product_img {
+        height: 235px;
+        background-color: white;
+        border-color: black;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .image_product {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        height: 90%;
+        max-width: 100%;
+    }
+
+    .detail {
+        height: 20%;
+        padding-top: 5px;
+    }
+
+    .bskt {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .qtybox {
+        margin-top: 20px;
+    }
+
+    .fade {
+        opacity: 1;
+    }
+
+    .fade:hover {
+        box-shadow:
+            1px 1px #121518,
+            2px 2px #121518,
+            3px 3px #121518;
+        -webkit-transform: translateX(-5px);
+        transform: translateX(-5px);
+    }
+
+    .detail_product {
+        color: black;
+        font-weight: bold;
+        margin-left: 10px;
+    }
+
+    .quantity_product {
+        color: black;
+        margin-left: 10px;
+        margin-bottom: 10px;
+    }
+
+    .price_product {
+        color: rgb(121, 5, 5);
+        font-weight: bold;
+        margin-left: 10px;
+        margin-bottom: 5px;
+    }
+
+    .bt {
+        margin-left: 0;
+    }
+
+    .yup {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+</style>
+{%endblock%}
+
+{% block home %}
+<div class="container-fluid">
+    <div class="row" id="myr">
+        <div class="col box1">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="row">
+                            <div class="col-md-12 inbox1">
+                                <img class="img-responsive imag my-0 py-0" src="{% static 'images/img.jpg'%}" alt="my image">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="row">
+                            <div class="col-md-12 inbox1">
+                                <img class="img-responsive imag my-0" src="{% static 'images/img2.jpg'%}" alt="my image">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="row">
+                            <div class="col-md-12 inbox1">
+                                <img class="img-responsive imag my-0" src="{% static 'images/img3.jpg'%}" alt="my image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-push-1 product_box">
+            {% for product in products %}
+            <div class="col-md-3 product">
+                <div class="col innerproduct fade">
+                    <div class="row">
+                        <div class="col product_img">
+                            <img class="image_product" src="{{product.img.url}}" alt="{{product.name}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col detail">
+                            <span class="detail_product">{{product.details}}</span> <br>
+                            <span class="quantity_product">{{product.quantity}}</span> <br>
+                            <span class="price_product">&#8377;{{product.price}}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 qtybox">
+                            {%if product.pk not in cart_Ids%}
+                            <form role="form" method="POST" action="{%url 'cart' pk=product.pk%}" class="post-form">
+                                {%csrf_token %}
+                                <div class="col-md-6">
+                                    <div class="input-group ">
+                                        <span class="input-group-addon">Qty</span>
+                                        <input type="text" class="form-control" value="1" name="quantity" maxlength="5">
+                                    </div>
+                                </div>
+                                <div class="col-md-5 pad-0">
+                                    <button type="submit" class="btn btn-add bskt">Add <span
+                                            class="glyphicon glyphicon-shopping-cart"></span></button>
+                                </div>
+                            </form>
+                            {%else%}
+                            <form role="form" method="POST" action="{%url 'remove_cart' pk=product.pk%}"
+                                class="post-form">{% csrf_token %}
+                                <div class="input-group">
+                                    <div class="col-md-9 yupn">
+                                        <input type="text" class="form-control"
+                                            value="Qty {{cart_details|get_item:product.details}} added in Cart"
+                                            name="quantity" maxlength="5">
+                                    </div>
+                                    <div class="col-md-1 yupn">
+                                        <button type="submit" class="btn lt bt"><i class="fa fa-minus"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                            {%endif%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+
+            <h4 align="center"><br><br><br>---</h4>
+        </div>
+
+        {% endblock %}

@@ -1,0 +1,172 @@
+   
+h1, h2, h3, h4 {
+    font-family: 'Lobster', cursive;
+}
+
+.date {
+    color: #828282;
+    font-size: 13px;
+}
+small{
+    font-size: 13px;
+}
+.publish{
+    color: black;
+}
+.author{
+    color: red;
+}
+.save {
+    float: right;
+}
+
+.post-form textarea, .post-form input {
+    width: 100%;
+}
+
+.post {
+    margin-bottom: 70px;
+}
+
+.post h2 a, .post h2 a:visited {
+    color: #000000;
+}
+li>a {
+    color: black;
+    font-size : 12pt;
+}
+.navbar-brand{
+    font-size :25pt;
+    color:white;
+    font-family: 'Indie Flower', cursive;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.navbar-brand:hover{
+    color:black;
+    font-family: 'Indie Flower', cursive;
+}
+.navbar-toggle>span{
+     background-color:black;
+}
+.active{
+     background-color:#bba0e2;
+}
+.acc{
+        width: 400px;
+        height: 150px;
+}
+.check{
+        align-items: center;
+}
+.sign_in,.create_account{
+        display: flex;
+        justify-content: center;
+        text-align:center;
+        align-items: center;
+        margin-top: 10pt;
+}
+.sign_in>button{
+        padding-left: 50pt;
+        padding-right: 50pt;
+}
+.list{
+        padding-left: 3px;
+}
+.list>li>a{
+        font-size: 14px;
+}
+.log_out>form{
+    display: flex;
+    justify-content: center;
+    text-align:center;
+    align-items: center;
+    margin-top: 5pt;
+    margin-bottom: 15pt;
+}
+.log_out>form>button{
+    padding-left: 50pt;
+    padding-right: 50pt;
+}
+.thank_you{
+    text-align: center;
+}
+.nav-line-1{
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Exotc350 DmBd BT';
+}
+.navbar-header{
+    align-items: center;
+}
+.alert-box>div{
+    text-align: center;
+}
+.navbar {
+    min-height: 60px;
+  }
+  
+  .navbar-brand {
+    padding: 0 11px;
+    height: 60px;
+    line-height: 60px;
+  }
+  
+  .navbar-toggle {
+    /* (80px - button height 34px) / 2 = 23px */
+    margin-top: 18px;
+    padding: 0px 0px !important;
+  }
+  
+  @media (min-width: 768px) {
+    .navbar-nav > li > a {
+      /* (80px - line-height of 27px) / 2 = 26.5px */
+      padding-top: 20.5px;
+      padding-bottom: 20.5px;
+      line-height: 20.5px;
+    }
+  }
+   a.prb{
+      height: 61px;
+  }
+  .yup{
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+    border: 1px solid #8760c1;
+    border-radius: 3px;
+}
+.mnu{
+    background-color: #ffffff;
+}
+.yupn{
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+.yup2{
+    padding-left: 20px;
+    height: 30px;
+    width: 600px;
+}
+.bt{
+    margin-top: 4px;
+}
+.empty{
+    text-align: center;
+    font-size: 20px;
+}
+.con{
+    padding-top: 35px;
+    padding-left: 70px;
+    color: #8760c1;
+    width: 200px;
+    height: 100px;
+}
+.clr{
+    background-color:#ceb1f8;
+}

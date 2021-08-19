@@ -1,0 +1,52 @@
+{%extends 'blog/base.html'%}
+{% load static %}
+{%load poll_extras%}
+{% block title %}
+Profile
+{% endblock title %}
+{%block cart%}
+{{cart_no}}
+{%endblock%}
+
+{%block stl%}
+<style type="text/css">
+.sccs{
+    font-size: 25px;
+    color: rgb(248, 245, 248);
+    background-color: rgb(44, 43, 43);
+    padding-left: 5px;
+}
+.bx{
+    border: 3px solid rgb(44, 43, 43);
+    border-radius: 3px;
+}
+.od{
+    font-size: 18px;
+    font-weight: bold;
+    padding-left: 5px;
+}
+.pad-l{
+    padding-left: 20px;
+}
+.ttl{
+    color: rgb(168, 51, 31);
+}
+</style>
+{%endblock%}
+{%block home%}
+<div class="row">
+    <div class="col-md-6 col-md-push-3 bx">
+        <div class = 'row'>
+            <div class="col">
+                <p class="sccs">User Profile</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p class="pad-l">Username : {{request.user.get_username}} </p>
+                <p class="pad-l">Email : {{email}}</p>
+            </div>
+        </div>
+    </div> 
+</div>
+{%endblock%}

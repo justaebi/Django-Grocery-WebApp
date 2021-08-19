@@ -1,0 +1,203 @@
+{% load static %}
+{%load poll_extras%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock title %} | India Mart</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/blog.css' %}">
+    <style type="text/css">
+    .acc{
+        width: 400px;
+        height: 150px;
+    }
+    </style>
+    {%block stl%}
+    {%endblock%}
+</head>
+<body>
+<nav class="navbar navbar-dark py-0" style="background-color:#8760c1;">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="{%url 'home'%}" class="navbar-brand">JUSTAEBI</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bar">
+            <ul class="nav navbar-nav">
+                <li {%block activity_home%}{%endblock%}><a href="{%url 'home'%}">Home</a> </li>
+                <li {%block activity_posts%}{%endblock%}><a href="{%url 'post_list'%}">Posts</a> </li>
+                <li {%block activity_contact%}{%endblock%}><a href="{%url 'contact'%}">Contact</a> </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" class="nav-a nav-a-2 nav-truncate">
+                        <span class="nav-line-2">Account<span class="caret"></span></span>
+                    </a>
+                    <ul class="dropdown-menu acc">
+                        {%if request.user.is_authenticated %}
+                        <li class="thank_you">
+                            {% if request.user.get_username %}
+                           <span class="nav-line-1">Welcome, {{ request.user.get_username }}</span>
+                        {% endif %}
+                        </li>
+                        <li class="log_out">
+                            <form action="{% url 'logout' %}" method="post" class="form-inline my-2 my-lg-0">
+                                {% csrf_token %}
+                                <button class="btn btn-danger my-2 my-sm-0" type="submit">Logout</button>
+                            </form>
+                        </li>
+                        {%else%}
+                        <li class="sign_in">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sign_in">
+                                Sign In
+                            </button>   
+                        </li>
+                        <li class="create_account"> 
+                            <h5>New to Our Mart~? <a href="" data-toggle="modal" data-target="#create_account">Create Account</a></h5>
+                        </li> 
+                        {%endif%}
+                        {%if request.user.is_authenticated %}
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-6" style="background-color:#f3f0f5;">
+                                <ul class="list">
+                                <li><a href="{%url 'profile'%}">Profile</a></li>
+                                <li><a href="{%url 'my_order'%}">My Orders</a></li>
+                                </ul>
+                            </div>
+                        </div> 
+                        {%endif%} 
+                    </ul>
+                </li>
+                
+                <li class="dropdown clr">
+                    <a href="#" class="dropdown-toggle prb" data-toggle="dropdown" class="nav-a nav-a-2 nav-truncate">
+                        <i class="fa fa-shopping-cart" style="font-size:25px;color:red"></i>
+                        <span class="items"> Items:{%block cart%}{%endblock%}</span>
+                    </a>
+                    <ul class="dropdown-menu mnu">
+                        {%if cart_no == 0%}
+                        <div class="row">
+                            <div class="col con">
+                           <small class="empty">Empty</small>
+                           </div>
+                        </div>
+                        {%else%}
+                        <li class="log_out">
+                            <form action="{%url 'buy'%}" method="post" class="form-inline my-2 my-lg-0">
+                                {% csrf_token %}
+                                <button class="btn btn-danger my-2 my-sm-0" type="submit">Buy</button>
+                            </form>
+                        </li>
+                        {%for key,value in cart_details.items%}
+                        <div class="row yup2">
+                            <form role="form" method="POST" action="{%url 'remove_cart_dropdown' val=key %}" class="post-form">{% csrf_token %}
+                                <div class="col-md-9 yup bdr">
+                                <a href="#" class="list-group-item"> {{key}} x {{value}} </a>
+                                </div>  
+                                <div class="col-md-1 yupn">
+                                    <button type="submit" class="btn lt bt"><i class="fa fa-minus"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                        {%endfor%}
+                        {%endif%}
+                    </ul>
+                </li>
+                <!--
+                <li>
+                    {%if request.user.is_authenticated %}
+                    
+                    <a href="{% url 'post_new' %}" class="lion"><span class="glyphicon glyphicon-plus-sign"></a>
+                    {% endif %}
+                </li>
+            -->
+            </ul>
+        </div>
+        <div class="modal fade" id="sign_in">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Log In</h3>
+                    </div>
+                    <form role="form" action="{%url 'Login' %}" method="POST" class="post-form">{% csrf_token %}
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input type="username" class="form-control" placeholder="username" name="username">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="password" name="password">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary btn-block">Log In</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="create_account">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Create Account</h3>
+                    </div>
+                    <form role="form" action="{%url 'Reg' %}" method="POST" class="post-form">{% csrf_token %}
+                        <div class="modal-body">
+                           <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Username" name="username" id="username">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Email Id" name="email" id="email">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="password" name="password" id="password">
+                            </div>
+                         </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+{% block home %}
+<div class="container-fluid">
+    <div class="row">
+        {% if messages %}
+                {% block messages %}
+                <div class="col-md-6 col-md-push-4">
+                <div class="alert-box" >
+                <div class="{{ messages.tag }}" id="div_msg" role="alert"> {{ messages.message }}  </div>
+                </div>
+                </div>
+                {% endblock %}
+        {% endif %}
+        <div class="col-md-8 col-md-push-2 in_post_list">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+</body>
+</html>

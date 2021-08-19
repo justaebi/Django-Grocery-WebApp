@@ -1,0 +1,57 @@
+{%extends 'blog/base.html'%}
+{% load static %}
+{%load poll_extras%}
+{% block title %}
+My Orders
+{% endblock title %}
+{%block cart%}
+{{cart_no}}
+{%endblock%}
+
+{%block stl%}
+<style type="text/css">
+.sccs{
+    font-size: 25px;
+    color: rgb(248, 245, 248);
+    background-color: rgb(44, 43, 43);
+    padding-left: 5px;
+}
+.bx{
+    border: 3px solid rgb(44, 43, 43);
+    border-radius: 3px;
+}
+.od{
+    font-size: 18px;
+    font-weight: bold;
+    padding-left: 5px;
+}
+.pad-l{
+    padding-left: 20px;
+}
+.ttl{
+    color: rgb(168, 51, 31);
+}
+</style>
+{%endblock%}
+{%block home%}
+<div class="row">
+    <div class="col-md-8 col-md-push-2 bx">
+        <div class = 'row'>
+            <div class="col">
+                <p class="sccs">My Orders</p>
+            </div>
+        </div>
+        {%for ans in prd%}
+        <div class="row">
+            <div class="col">
+                <p class='od'>{{ans.time}}</p>
+                <p class="pad-l">Name : {{ans.name}}</p>
+                <p class="pad-l">Address : {{ans.address}}  Pincode : {{ans.pincode}}  Contact : {{ans.contact}}</Address></p>
+                <p class="pad-l">{{ans.order}}</p>
+                <p class="pad-l ttl">Total : Rs.{{ans.total}}</p>
+            </div>
+        </div>
+        {%endfor%}
+    </div> 
+</div>
+{%endblock%}
