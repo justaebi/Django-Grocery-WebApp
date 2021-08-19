@@ -1,8 +1,8 @@
 This is a shopping web-app created using Django framework
 
-![ScreenShot](1.jpg)
-![ScreenShot](2.jpg)
-![ScreenShot](3.jpg)
-![ScreenShot](4.jpg)
-![ScreenShot](5.jpg)
-![ScreenShot](6.jpg)
+![](https://github.com/justaebi/Django-Grocery-WebApp/blob/master/1.jpg)
+![](https://github.com/justaebi/Django-Grocery-WebApp/blob/master/2.jpg)
+![](https://github.com/justaebi/Django-Grocery-WebApp/blob/master/3.jpg)
+![](https://github.com/justaebi/Django-Grocery-WebApp/blob/master/4.jpg)
+![](https://github.com/justaebi/Django-Grocery-WebApp/blob/master/5.jpg)
+![](https://github.com/justaebi/Django-Grocery-WebApp/blob/master/6.jpg)
